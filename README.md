@@ -1,9 +1,9 @@
 # FizzBuzz Rest API Server
 
 Expose a REST API endpoint that accepts five parameters : 
-    two strings (say, string1 and string2), 
-    and three integers (say, int1, int2 and limit), 
-    and returns a JSON
+two strings (say, string1 and string2), 
+and three integers (say, int1, int2 and limit), 
+and returns a JSON
 
 It must return a list of strings with numbers from 1 to limit, where:
 all multiples of int1 are replaced by string1,

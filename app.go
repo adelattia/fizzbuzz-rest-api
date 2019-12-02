@@ -13,11 +13,12 @@ type App struct {
 }
 
 func (a *App) Initialize() {
-	a.Router = mux.NewRouter()
-	a.initializeRoutes()
+	a.Router = a.initializeRoutes()
 	log.Fatal(http.ListenAndServe(":8080", a.Router))
 }
 
-func (a *App) initializeRoutes() {
-	a.Router.HandleFunc("/fizzbuzz", fizzbuzz.FizzBuzz).Methods("GET")
+func (a *App) initializeRoutes() *mux.Router {
+	r := mux.NewRouter()
+	r.HandleFunc("/fizzbuzz", fizzbuzz.FizzBuzz).Methods("GET")
+	return r
 }
