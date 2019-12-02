@@ -12,7 +12,7 @@ all multiples of int1 and int2 are replaced by string1string2
 
 Todo :
  - [ ] Write Tests (try TDD approach)
- - [ ] Structure the app
+ - [x] Structure the app
  - [x] DockerFile for deployment, seperate build and runnable images
  - [ ] Write fizzbuzz controller
  - [ ] Postman collection
@@ -20,5 +20,7 @@ Todo :
 
 Optional ?
  - [ ] add very simple UI
+ - [ ] add benchmarks
+ - [ ] add swagger documentation
 
 
