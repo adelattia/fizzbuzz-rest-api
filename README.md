@@ -23,10 +23,23 @@ Optional ?
  - [x] add benchmarks
  - [ ] add swagger documentation
 
+## Installation
 
-Conclusions :
+Vendor packages are included on the repo
+You can use docker:
+```
+docker build -t fizzbuzz .
+docker run -d -p 8080:8080 fizzbuzz
+``` 
+
+Or you can build and execute the server using go (tested with 1.13 version)
+```
+go build -mod=vendor -o main
+./main
+```
 
 
+## Conclusions
 
 I've tried 2 implementations, one straightforwad using the modulo (%) and one I thought it will be way more optimized since I thought modulo operation is expensive
 
