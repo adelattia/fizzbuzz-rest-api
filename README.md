@@ -20,7 +20,22 @@ Todo :
 
 Optional ?
  - [ ] add very simple UI
- - [ ] add benchmarks
+ - [x] add benchmarks
  - [ ] add swagger documentation
+
+
+Conclusions :
+
+
+
+I've tried 2 implementations, one straightforwad using the modulo (%) and one I thought it will be way more optimized since I thought modulo operation is expensive
+
+It turned out that both have almost the same performance
+
+=> to try the benchmark :
+
+```
+go test -bench=.
+```
 
 

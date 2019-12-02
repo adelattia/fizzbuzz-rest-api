@@ -26,11 +26,12 @@ func FizzBuzz(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var fizzBuzzList []string
-	fizzBuzzNaive(int1, int2, string1, string2, limit, &fizzBuzzList)
+	FizzBuzzNaive(int1, int2, string1, string2, limit, &fizzBuzzList)
 	respondWithJSON(w, http.StatusOK, fizzBuzzList)
 }
 
-func fizzBuzzNaive(int1, int2 int, string1, string2 string, limit int, result *[]string) {
+// FizzBuzzNaive is a straightforward implementation using the modulo
+func FizzBuzzNaive(int1, int2 int, string1, string2 string, limit int, result *[]string) {
 	for i := 1; i <= limit; i++ {
 		if i%int1 == 0 && i%int2 == 0 {
 			*result = append(*result, string1+string2)
@@ -38,6 +39,28 @@ func fizzBuzzNaive(int1, int2 int, string1, string2 string, limit int, result *[
 			*result = append(*result, string1)
 		} else if i%int2 == 0 {
 			*result = append(*result, string2)
+		} else {
+			*result = append(*result, strconv.Itoa(i))
+		}
+	}
+}
+
+// FizzBuzzNoModulo is based on an algorithm I found in https://news.ycombinator.com/item?id=1383978
+// the purpose is to see if the modulo is a costly operation
+func FizzBuzzNoModulo(int1, int2 int, string1, string2 string, limit int, result *[]string) {
+	i1 := 0
+	i2 := 0
+	for i := 1; i <= limit; i++ {
+		i1++
+		i2++
+		if i1 == int1 && i2 == int2 {
+			*result = append(*result, string1+string2)
+		} else if i1 == int1 {
+			*result = append(*result, string1)
+			i1 = 0
+		} else if i2 == int2 {
+			*result = append(*result, string2)
+			i2 = 0
 		} else {
 			*result = append(*result, strconv.Itoa(i))
 		}

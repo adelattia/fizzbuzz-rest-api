@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"github.com/adelattia/fizzbuzz-rest-api/fizzbuzz"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -33,6 +34,20 @@ func TestMain(t *testing.T) {
 	if !testEq(want, got) {
 		t.Errorf("Invalid output\n was: %s\n expected: %s", got, want)
 		t.Fail()
+	}
+}
+
+func BenchmarkFizBuzz(b *testing.B) {
+	var result []string
+	for n := 0; n < b.N; n++ {
+		fizzbuzz.FizzBuzzNaive(3, 5, "Fizz", "Buzz", 3000, &result)
+	}
+}
+
+func BenchmarkFizBuzzNoModulo(b *testing.B) {
+	var result []string
+	for n := 0; n < b.N; n++ {
+		fizzbuzz.FizzBuzzNoModulo(3, 5, "Fizz", "Buzz", 3000, &result)
 	}
 }
 
