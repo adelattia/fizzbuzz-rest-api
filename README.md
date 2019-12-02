@@ -14,7 +14,7 @@ Todo :
  - [ ] Write Tests (try TDD approach)
  - [x] Structure the app
  - [x] DockerFile for deployment, seperate build and runnable images
- - [ ] Write fizzbuzz controller
+ - [x] Write fizzbuzz controller
  - [ ] Postman collection
  - [ ] Docs for deployment and user guide
 
