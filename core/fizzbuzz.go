@@ -7,11 +7,10 @@ import (
 	"strconv"
 )
 
-
 type Response struct {
 	StatusCode uint
-	Result []string
-	Message string
+	Result     []string
+	Message    string
 }
 
 // FizzBuzz Handler that accepts five params
@@ -52,6 +51,9 @@ func fizzBuzzCheck(int1, int2 int, string1, string2 string, limit int) ([]string
 	// check if int1 and int2 are the same
 	if int1 == int2 {
 		return []string{}, errors.New("You should provide different multiples"), 1
+	}
+	if int1 > limit || int2 > limit {
+		return []string{}, errors.New("Multiples should be less than limit"), 1
 	}
 	return []string{}, nil, 0
 }
@@ -117,8 +119,8 @@ func respondWithError(w http.ResponseWriter, code int, error error, statusCode u
 
 	errorResponse := Response{
 		StatusCode: statusCode,
-		Message: error.Error(),
-		Result: nil,
+		Message:    error.Error(),
+		Result:     nil,
 	}
 
 	response, _ := json.Marshal(errorResponse)
