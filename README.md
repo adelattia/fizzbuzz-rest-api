@@ -43,9 +43,9 @@ go build -mod=vendor -o main
 
 ## Conclusions
 
-I've tried 2 implementations, one straightforwad using the modulo (%) and one I thought it will be way more optimized since I thought modulo operation is expensive
+I've tried 2 implementations, one straightforwad using the modulo (%) and one 
+without modulo since it is an expensive operation
 
-It turned out that both have almost the same performance
 
 => to try the benchmark :
 

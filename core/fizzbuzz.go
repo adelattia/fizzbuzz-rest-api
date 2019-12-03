@@ -23,18 +23,21 @@ func FizzBuzz(w http.ResponseWriter, r *http.Request) {
 
 	int1, err := strconv.Atoi(r.FormValue("int1"))
 	if err != nil {
-		// todo: http error
+		respondWithError(w, http.StatusBadRequest, errors.New("error parsing int1"), 1)
+		return
 	}
 	int2, err := strconv.Atoi(r.FormValue("int2"))
 	if err != nil {
-		// todo: http error
+		respondWithError(w, http.StatusBadRequest, errors.New("error parsing int2"), 1)
+		return
 	}
 	string1 := r.FormValue("string1")
 	string2 := r.FormValue("string2")
 
 	limit, err := strconv.Atoi(r.FormValue("limit"))
 	if err != nil {
-		// todo: http error
+		respondWithError(w, http.StatusBadRequest, errors.New("error parsing limit"), 1)
+		return
 	}
 
 	fizzBuzzList, error, statusCode := FizzBuzzNaive(int1, int2, string1, string2, limit)

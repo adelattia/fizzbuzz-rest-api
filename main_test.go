@@ -5,6 +5,7 @@ import (
 	"github.com/adelattia/fizzbuzz-rest-api/core"
 	"net/http"
 	"net/http/httptest"
+	"reflect"
 	"testing"
 )
 
@@ -31,7 +32,7 @@ func TestFizzBuzzSucess(t *testing.T) {
 	}
 
 	want := []string{"1", "2", "Fizz", "4", "Buzz", "Fizz", "7", "8", "Fizz", "Buzz", "11", "Fizz", "13", "14", "FizzBuzz"}
-	if !testEq(want, got.Result) {
+	if !reflect.DeepEqual(got.Result, want) {
 		t.Errorf("Invalid output\n was: %s\n expected: %s", got.Result, want)
 		t.Fail()
 	}
@@ -39,30 +40,12 @@ func TestFizzBuzzSucess(t *testing.T) {
 
 func BenchmarkFizBuzz(b *testing.B) {
 	for n := 0; n < b.N; n++ {
-		core.FizzBuzzNaive(3, 5, "Fizz", "Buzz", 100)
+		core.FizzBuzzNaive(3, 5, "Fizz", "Buzz", 500)
 	}
 }
 
 func BenchmarkFizBuzzNoModulo(b *testing.B) {
 	for n := 0; n < b.N; n++ {
-		core.FizzBuzzNoModulo(3, 5, "Fizz", "Buzz", 100)
+		core.FizzBuzzNoModulo(3, 5, "Fizz", "Buzz", 500)
 	}
-}
-
-func testEq(a, b []string) bool {
-	if (a == nil) != (b == nil) {
-		return false
-	}
-
-	if len(a) != len(b) {
-		return false
-	}
-
-	for i := range a {
-		if a[i] != b[i] {
-			return false
-		}
-	}
-
-	return true
 }
