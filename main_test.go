@@ -2,7 +2,7 @@ package main
 
 import (
 	"encoding/json"
-	"github.com/adelattia/fizzbuzz-rest-api/fizzbuzz"
+	"github.com/adelattia/fizzbuzz-rest-api/core"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -18,11 +18,11 @@ func executeRequest(req *http.Request) *httptest.ResponseRecorder {
 	return rr
 }
 
-func TestMain(t *testing.T) {
+func TestFizzBuzzSucess(t *testing.T) {
 	req, _ := http.NewRequest("GET", "/fizzbuzz?string1=Fizz&string2=Buzz&int1=3&int2=5&limit=15", nil)
 	r := executeRequest(req)
 
-	var got []string
+	var got core.Response
 	err := json.Unmarshal([]byte(r.Body.String()), &got)
 
 	if err != nil {
@@ -31,23 +31,21 @@ func TestMain(t *testing.T) {
 	}
 
 	want := []string{"1", "2", "Fizz", "4", "Buzz", "Fizz", "7", "8", "Fizz", "Buzz", "11", "Fizz", "13", "14", "FizzBuzz"}
-	if !testEq(want, got) {
-		t.Errorf("Invalid output\n was: %s\n expected: %s", got, want)
+	if !testEq(want, got.Result) {
+		t.Errorf("Invalid output\n was: %s\n expected: %s", got.Result, want)
 		t.Fail()
 	}
 }
 
 func BenchmarkFizBuzz(b *testing.B) {
-	var result []string
 	for n := 0; n < b.N; n++ {
-		fizzbuzz.FizzBuzzNaive(3, 5, "Fizz", "Buzz", 3000, &result)
+		core.FizzBuzzNaive(3, 5, "Fizz", "Buzz", 100)
 	}
 }
 
 func BenchmarkFizBuzzNoModulo(b *testing.B) {
-	var result []string
 	for n := 0; n < b.N; n++ {
-		fizzbuzz.FizzBuzzNoModulo(3, 5, "Fizz", "Buzz", 3000, &result)
+		core.FizzBuzzNoModulo(3, 5, "Fizz", "Buzz", 100)
 	}
 }
 
